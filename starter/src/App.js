@@ -1,46 +1,33 @@
-import { useState } from 'react';
+import { useState, useEffect, useCallback } from 'react';
+import { Route, Routes } from 'react-router-dom';
 
 import HomePage from './pages/homepage/homepage.component';
+import Search from './pages/search/search.component';
+
+import { getAll } from './BooksAPI';
 
 import './App.css';
 
 function App() {
-  const [showSearchPage, setShowSearchPage] = useState(false);
+  const [allBooks, setAllBooks] = useState([]);
+
+  let fetchData = useCallback(async () => {
+    const res = await getAll();
+    setAllBooks(res);
+  }, []);
+
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
 
   return (
-    <div className='app'>
-      {showSearchPage ? (
-        <div className='search-books'>
-          <div className='search-books-bar'>
-            <a
-              className='close-search'
-              onClick={() => setShowSearchPage(!showSearchPage)}
-            >
-              Close
-            </a>
-            <div className='search-books-input-wrapper'>
-              <input
-                type='text'
-                placeholder='Search by title, author, or ISBN'
-              />
-            </div>
-          </div>
-          <div className='search-books-results'>
-            <ol className='books-grid'></ol>
-          </div>
-        </div>
-      ) : (
-        <div className='list-books'>
-          <div className='list-books-title'>
-            <h1>MyReads</h1>
-          </div>
-          <HomePage />
-          <div className='open-search'>
-            <a onClick={() => setShowSearchPage(!showSearchPage)}>Add a book</a>
-          </div>
-        </div>
-      )}
-    </div>
+    <Routes>
+      <Route
+        path='/'
+        element={<HomePage allBooks={allBooks} fetchData={fetchData} />}
+      />
+      <Route path='/search' element={<Search fetchData={fetchData} />} />
+    </Routes>
   );
 }
 

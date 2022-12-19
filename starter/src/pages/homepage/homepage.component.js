@@ -1,32 +1,10 @@
-import { useState, useEffect, useCallback } from 'react';
-
-import { getAll } from '../../BooksAPI';
+import { Link } from 'react-router-dom';
 
 import BooKShelf from '../../components/book-shelf.component';
 
-const HomePage = () => {
-  const [allBooks, setAllBooks] = useState([]);
-
-  let fetchData = useCallback(async () => {
-    const res = await getAll();
-    setAllBooks(res);
-  }, []);
-
-  useEffect(() => {
-    fetchData();
-  }, [fetchData]);
-
-  // useEffect(() => {
-  //   const getAllBooks = async () => {
-  //     const res = await getAll();
-  //     console.log(res);
-  //     setAllBooks(res);
-  //   };
-  //   getAllBooks();
-  // }, []);
-
+const HomePage = ({ allBooks, fetchData }) => {
   if (allBooks.length < 1) {
-    return <div className='loading'>Loading...</div>;
+    return <div className='loading-message'>Loading...</div>;
   }
 
   return (
@@ -49,6 +27,9 @@ const HomePage = () => {
           shelfBooks={allBooks.filter((book) => book.shelf === 'read')}
           fetchData={fetchData}
         />
+        <div className='open-search'>
+          <Link to={'/search'}>Add a book</Link>
+        </div>
       </div>
     </div>
   );

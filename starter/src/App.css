@@ -65,6 +65,10 @@ body,
   font-size: 0;
 }
 
+.open-search a:hover {
+  cursor: pointer;
+}
+
 /* search page */
 
 .search-books-bar {
@@ -176,7 +180,13 @@ body,
   font-size: 0.8em;
 }
 
-.loading {
-  font-size: 4rem;
+.loading-message {
+  font-size: 3rem;
+  padding: 20rem 0;
   text-align: center;
+}
+
+.error-message {
+  font-size: 2rem;
+  margin-top: 3.4rem;
 }

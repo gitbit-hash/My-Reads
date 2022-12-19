@@ -8,6 +8,7 @@ const BookItem = ({ book, fetchData }) => {
 
     fetchData();
   };
+
   return (
     <li>
       <div className='book'>
@@ -17,12 +18,12 @@ const BookItem = ({ book, fetchData }) => {
             style={{
               width: 128,
               height: 193,
-              backgroundImage: `url(${book.imageLinks.thumbnail})`,
+              backgroundImage: `url(${book.imageLinks?.thumbnail})`,
             }}
           ></div>
           <div className='book-shelf-changer'>
-            <select onChange={handleChange}>
-              <option value='none' disabled>
+            <select defaultValue={'DEFAULT'} onChange={handleChange}>
+              <option value='DEFAULT' disabled>
                 Move to...
               </option>
               <option value='currentlyReading'>Currently Reading</option>
@@ -33,7 +34,9 @@ const BookItem = ({ book, fetchData }) => {
           </div>
         </div>
         <div className='book-title'>{book.title}</div>
-        <div className='book-authors'>{book.authors.join(', ')}</div>
+        {book.authors && (
+          <div className='book-authors'>{book.authors?.join(', ')}</div>
+        )}
       </div>
     </li>
   );
