@@ -175,3 +175,8 @@ body,
   text-align: center;
   font-size: 0.8em;
 }
+
+.loading {
+  font-size: 4rem;
+  text-align: center;
+}
