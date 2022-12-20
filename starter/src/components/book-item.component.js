@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 import { update } from '../BooksAPI';
 
 const BookItem = ({ book, fetchData }) => {
@@ -13,14 +15,16 @@ const BookItem = ({ book, fetchData }) => {
     <li>
       <div className='book'>
         <div className='book-top'>
-          <div
-            className='book-cover'
-            style={{
-              width: 128,
-              height: 193,
-              backgroundImage: `url(${book.imageLinks?.thumbnail})`,
-            }}
-          ></div>
+          <Link to={`/${book.id}`}>
+            <div
+              className='book-cover'
+              style={{
+                width: 128,
+                height: 193,
+                backgroundImage: `url(${book.imageLinks?.thumbnail})`,
+              }}
+            ></div>
+          </Link>
           <div className='book-shelf-changer'>
             <select defaultValue={'DEFAULT'} onChange={handleChange}>
               <option value='DEFAULT' disabled>

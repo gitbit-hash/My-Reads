@@ -23,8 +23,6 @@ const Search = ({ fetchData }) => {
     searchBooks();
   }, [inputValue]);
 
-  console.log(searchQuery);
-
   const handleInputChange = (e) => {
     const trimmedInput = e.target.value.trim();
 

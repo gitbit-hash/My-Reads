@@ -3,6 +3,7 @@ import { Route, Routes } from 'react-router-dom';
 
 import HomePage from './pages/homepage/homepage.component';
 import Search from './pages/search/search.component';
+import BookDetails from './pages/book-details/book-details.component';
 
 import { getAll } from './BooksAPI';
 
@@ -26,6 +27,7 @@ function App() {
         path='/'
         element={<HomePage allBooks={allBooks} fetchData={fetchData} />}
       />
+      <Route path='/:bookId' element={<BookDetails />} />
       <Route path='/search' element={<Search fetchData={fetchData} />} />
     </Routes>
   );
